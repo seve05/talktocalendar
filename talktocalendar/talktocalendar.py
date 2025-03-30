@@ -65,7 +65,7 @@ def prompt_llm():
 
     if user_request == "exit":
         quit()
-    if user_request =="clear": #should just do this with for loop
+    if user_request =="clear": #should just do this with for loop OR keep this and if !json generrate from this
     to_write = r"""{
   "week": {
     "stats": {
