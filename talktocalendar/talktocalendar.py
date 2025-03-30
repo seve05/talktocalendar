@@ -65,8 +65,8 @@ def prompt_llm():
 
     if user_request == "exit":
         quit()
-    if user_request =="clear":
-        to_write = r"""{
+    if user_request =="clear": #should just do this with for loop
+    to_write = r"""{
   "week": {
     "stats": {
       "current_week": 0
