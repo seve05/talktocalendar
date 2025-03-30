@@ -40,7 +40,8 @@ class ScheduleApp(QMainWindow):
             return "<h1>Error loading schedule</h1>"
 
         week = data["week"]
-        
+        week_number = str(data["week"]["stats"])
+        week_number = week_number[16:20]
         # Build table rows
         rows = ""
         for hour in range(1, 25):
@@ -101,7 +102,7 @@ class ScheduleApp(QMainWindow):
             </style>
         </head>
         <body>
-            <h1>Weekly Schedule</h1>
+            <h1>Calendar Week: {week_number}</h1>
             <table>
                 <thead>
                     <tr>
