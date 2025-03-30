@@ -318,7 +318,8 @@ if __name__ =="__main__":
 
 
     #
-    #
+    #   need to circumvent having to reload the model everytime -> change manipulation of json 
+    #   interaction with llm loop, should stay open for conversation or prompts after change has been made 
     #   braucht noch zweig zwischen audio und textversion fuer pcs ohne mikrofon
     #
     #
