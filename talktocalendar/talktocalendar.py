@@ -5,8 +5,6 @@ import json
 import os  
 import re
 from datetime import datetime
-import speech_recognition as sr
-import pyttsx3
 
 def clean_llm_output(text):
     # Use regex to remove anything between <think> and </think> tags (including the tags)
@@ -49,24 +47,6 @@ def write_json(changes):
     with open('schedule.json', 'w') as file:
         json.dump(data, file, indent=2)  # Write entire 'data' object as JSON
 
-def listen_to_user():
-    with sr.Microphone() as source:
-        print("Say something...")
-        audio = recognizer.listen(source)
-        try:
-            user_request = recognizer.recognize_google(audio)  # Uses Google's free API
-            print(f"You said: {user_request}")
-            return user_request
-        except sr.UnknownValueError:
-            return "Sorry, I didn’t catch that."
-        except sr.RequestError:
-            return "Sorry, there was an issue with the speech service."
-
-# Function to speak the response
-def speak_response(text):
-    tts_engine.say(text)
-    tts_engine.runAndWait()
-
 
 
 def prompt_llm():
@@ -78,7 +58,7 @@ def prompt_llm():
     except FileNotFoundError:
         return "Error: The specified JSON file could not be found."
                                 ####################################################################user input
-    #user_request = listen_to_user()
+    
     user_request  = str(input("Enter any request: ")) #falls kein mikrofon vorhanden ist
     if user_request == "help":
         print("\nYou can request entries and I will try to make the changes,\nif its's not exactly what you had in mind, ask again.\nexit = quits calendar\nclear = clear the weeks entries\n")
@@ -309,7 +289,6 @@ def prompt_llm():
     response = llm.invoke(formatted_prompt)
     cleaned_response = rm_changes(clean_llm_output(response))
     print(cleaned_response) #####################################################################LLM_Response
-    #llm_response = speak_response(cleaned_response)
     
     test_for_empty = str(extract_changes(response))
     if test_for_empty != "":
